@@ -1,5 +1,5 @@
 {% macro header(current_section) %}
-<div class="header-bar fixed-top"></div>
+<!-- <div class="header-bar fixed-top"></div> -->
 <header class="navbar fixed-top navbar-expand-md navbar-light">
 	<div class="container">
 		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
@@ -57,8 +57,8 @@
 			<div class="break order-6 d-md-none"></div>
 			{% if config.build_search_index %}
 				<form class="navbar-form flex-grow-1 order-7 order-md-3">
-					<input id="userinput" class="form-control is-search" type="search" placeholder="Search docs..."
-						aria-label="Search docs..." autocomplete="off">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search..."
+						aria-label="Search..." autocomplete="off">
 					<div id="suggestions" class="shadow bg-white rounded"></div>
 				</form>
 			{% endif %}

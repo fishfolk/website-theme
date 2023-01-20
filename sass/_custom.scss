@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: blue orange;
+    box-sizing: border-box;
+}
+
+*::-webkit-scrollbar {
+    width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #3A4466;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #181425;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+.navbar {
+    margin-top: 0px;
+
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.9em;
+
+    .navbar-brand {
+        font-size: 1.2em;
+        padding-right: 0.5em;
+    }
+
+    .navbar-form .form-control {
+        font-size: 0.8em;
+    }
+
+    .navbar-form {
+        display: flex;
+        align-items: center;
+
+        #suggestions {
+            align-self: flex-start;
+            top: 2rem;
+
+            span {
+                font-size: 0.8em;
+            }
+        }
+    }
+
+    .navbar-form::after {
+        top: auto;
+    }
+}
