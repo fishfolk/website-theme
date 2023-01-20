@@ -171,7 +171,7 @@
     .content_box,
     img,
     .grass,
-    .whale {
+    .fish {
         image-rendering: optimizeSpeed;
         image-rendering: -moz-crisp-edges;
         image-rendering: -webkit-optimize-contrast;
@@ -224,37 +224,32 @@
         }
     }
 
-    .whale {
-        width: 76px;
-        height: 64px;
-        animation: whale 1.1s steps(7) infinite;
+    .fish {
+        width: 96px;
+        height: 80px;
+        animation: fish 2s steps(14) infinite;
     }
 
-    .blue {
-        background-image: url(assets/Whale/w_b_spc.png);
+    #fish1 {
+        background-image: url(assets/fish/catty.png);
     }
 
-    .red {
-        background-image: url(assets/Whale/w_r_spc.png);
+    #fish2 {
+        background-image: url(assets/fish/pescy.png);
         animation-delay: 0.25s;
-    }
-
-    .green {
-        background-image: url(assets/Whale/w_g_spc.png);
-        animation-delay: 0.4s;
     }
 
     .flip {
         transform: scaleX(-1);
     }
 
-    @keyframes whale {
+    @keyframes fish {
         from {
             background-position-x: 0px;
         }
 
         to {
-            background-position-x: -532px;
+            background-position-x: -1344px;
         }
     }
 
