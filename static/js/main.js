@@ -6,9 +6,8 @@ document.getElementById('mode').addEventListener('click', () => {
   
 });
   
-// enforce local storage setting but also fallback to user-agent preferences
-if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-  
+// default to dark theme, and only do the light theme if they have explicitly set the theme by
+// clicking the button.
+if (localStorage.getItem('theme') !== 'light') {
   document.body.classList.add('dark');
-  
 }
