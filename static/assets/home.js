@@ -62,7 +62,7 @@ window.addEventListener('resize', function () {
 
 // Create particles.
 particle_texture.src = 'assets/buble.png';
-particle_box.height = document.body.scrollHeight;
+particle_box.height = window.innerHeight;
 particle_box.width = window.innerWidth;
 
 for (let index = 0; index < particle_count; index++) {
