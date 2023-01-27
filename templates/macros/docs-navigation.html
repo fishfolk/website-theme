@@ -4,11 +4,11 @@
   {# 1. directly find the lighter if exists, #}
   {# 2. find the last page in the previous sibling section, and #}
   {# 3. find the last page in the parent section. #}
-  {% if page.lower %}
-  <a href="{{ page.lower.permalink }}">
+  {% if page.lighter %}
+  <a href="{{ page.lighter.permalink }}">
     <div class="card my-1">
       <div class="card-body py-2">
-        &larr; {{ page.lower.title }}
+        &larr; {{ page.lighter.title }}
       </div>
     </div>
   </a>
@@ -44,7 +44,6 @@
                 </div>
               </a>
             {% endif %}
-            {# no break #}
             {% set_global found_current = false %}
           {% endif %}
         {% endif %}
@@ -56,11 +55,11 @@
   {# 1. directly find the heavier if exists, #}
   {# 2. find the first page in the subsection, and #}
   {# 3. find the first page in the next sibling section. #}
-  {% if page.higher %}
-    <a class="ms-auto" href="{{ page.higher.permalink }}">
+  {% if page.heavier %}
+    <a class="ms-auto" href="{{ page.heavier.permalink }}">
       <div class="card my-1">
         <div class="card-body py-2">
-          {{ page.higher.title }} &rarr;
+          {{ page.heavier.title }} &rarr;
         </div>
       </div>
     </a>
