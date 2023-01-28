@@ -27,27 +27,52 @@
 			
 			{% if index.subsections %}
 					{% for s in index.subsections %}
-					{% set subsection = get_section(path=s) %}
-					{% if subsection.pages %}
+						{% set subsection = get_section(path=s) %}
+						
+						{% if subsection.pages or subsection.subsections %}
 							<h3>{{ subsection.title }}</h3>
 							<ul class="list-unstyled">
-							{% for page in subsection.pages %}                           
-								{% if page.extra is containing("external_link") %}
-									<li>
-										<a class="d-flex align-items-center justify-content-between docs-link pe-3" target="_blank" href="{{ page.extra.external_link }}">
-											<span>{{ page.title }}</span>
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-2 bi bi-box-arrow-up-right" viewBox="0 0 16 16">
-												<path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
-												<path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
-											</svg>
-										</a>
-									</li>
-								{% else %}
-									<li><a class="docs-link{% if current_url == page.permalink %} active{% endif %}" href="{{ page.permalink | safe }}">{{ page.title }}</a></li>
-								{% endif %}
-							{% endfor %}
-					</ul>
-					{% endif %}
+								{# First Level #}
+								{% for page in subsection.pages %}                           
+									{% if page.extra is containing("external_link") %}
+										<li>
+											<a class="d-flex align-items-center justify-content-between docs-link pe-3" target="_blank" href="{{ page.extra.external_link }}">
+												<span>{{ page.title }}</span>
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-2 bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+													<path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+													<path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+												</svg>
+											</a>
+										</li>
+									{% else %}
+										<li><a class="docs-link{% if current_url == page.permalink %} active{% endif %}" href="{{ page.permalink | safe }}">{{ page.title }}</a></li>
+									{% endif %}
+								{% endfor %}
+
+								{# Second Level #}
+								{% for s in subsection.subsections %}
+									{% set innersubsection = get_section(path=s) %}
+									{% if innersubsection.pages  %}
+										{% for page in innersubsection.pages %}                           
+											{% if page.extra is containing("external_link") %}
+												<li>
+													<a class="d-flex align-items-center justify-content-between docs-link pe-3" target="_blank" href="{{ page.extra.external_link }}">
+														<span>{{ page.title }}</span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-2 bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+															<path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+															<path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+														</svg>
+													</a>
+												</li>
+											{% else %}
+												<li><a class="docs-link{% if current_url == page.permalink %} active{% endif %}" href="{{ page.permalink | safe }}">{{ page.title }}</a></li>
+											{% endif %}
+										{% endfor %}
+									{% endif %}
+								{% endfor %}
+							</ul>
+						{% endif %}
+						
 					{% endfor %}
 			{% endif %}
 	</nav>
