@@ -19,16 +19,14 @@
           <h1 class="text-center">{{ section.title }}</h1>
           <div class="text-center">{{ section.content | safe }}</div>
           <div class="row mt-6 my-5">
-            {% for s in section.subsections %}
-              {% set subsection = get_section(path=s) %}
+            {% for page in section.pages %}
               <div class="col-18 col-sm-9">
                 <div class="card">
-                  <img src="{{ subsection.extra.image }}" class="card-img-top" alt="{{ subsection.title }}">
+                  <img src="{{ page.extra.image }}" class="card-img-top" alt="{{ page.title }}">
                   <div class="card-body">
-                    <h5 class="card-title mt-0">{{ subsection.title }}</h5>
-                    <p class="card-text">{{ subsection.description }}</p>
-                    {% set card_subsection = get_section(path=subsection.subsections[0]) %}
-                    <a href="{{ card_subsection.pages[0].permalink }}" class="btn btn-primary stretched-link">Learn More</a>
+                    <h5 class="card-title mt-0">{{ page.title }}</h5>
+                    <p class="card-text">{{ page.description }}</p>
+                    <a href="{{ page.permalink }}" class="btn btn-primary stretched-link">Learn More</a>
                   </div>
                 </div>
               </div>

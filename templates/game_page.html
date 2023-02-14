@@ -1,0 +1,89 @@
+{# Default page.html template #}
+
+{% extends "base.html" %}
+
+{% block seo %}
+  {{ super() }}
+  {% set title_addition = "" %}
+  {% if page.title and config.title %}
+    {% set title = page.title %}
+    {% set title_addition = title_separator ~ config.title %}
+  {% elif page.title %}
+    {% set title = page.title %}
+  {% else %}
+    {% set title = config.title %}
+  {% endif %}
+  
+  {% if page.description %}
+    {% set description = page.description %}
+  {% else %}
+    {% set description = config.description %}
+  {% endif %}
+  {% set created_time = page.date %}
+  {% set updated_time = page.updated %}
+  {% if current_section %}
+    {% set page_section = current_section %}
+  {% else %}
+    {% set page_section = "" %}
+  {% endif %}
+  
+  {{ macros_head::seo(title=title, title_addition=title_addition, description=description, type="article", is_page=true, created_time=created_time, updated_time=updated_time, page_section=page_section) }}
+{% endblock seo %}
+  
+{% block body %}
+  {% if section.extra.class %}
+    {% set page_class = page.extra.class %}
+  {% else %}
+    {% set page_class = "page single" %}
+  {% endif %}
+{% endblock body %}
+
+{% block content %}
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+      
+      <h3>{{ page.title }}</h3>
+      {% if page.extra.github_link %}
+      <a class="docs-link d-flex align-items-center" target="_blank" href="{{ page.extra.github_link }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github">
+          <path
+            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+          </path>
+        </svg>
+        <span class="ms-2">GitHub</span>
+      </a>
+      {% endif %}
+        <div class="page-links">
+          <h3>On this page</h3>
+          <nav id="TableOfContents">
+            <ul>
+              {% for h1 in page.toc %}
+              <li><a href="{{ h1.permalink | safe}}">{{ h1.title }}</a></li>
+              {% if h1.children %}
+              <ul>
+                {% for h2 in h1.children %}
+                <li><a href="{{ h2.permalink | safe }}">{{ h2.title }}</a></li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+              {% endfor %}
+            </ul>
+          </nav>
+        </div>
+      </nav>
+      <div class="col-md-12 col-lg-13 col-xxl-12">
+        <article>
+          <div class="page-header">
+            <h1>{{ page.title }}</h1>
+          </div>
+          {% if page.extra.lead %}<p class="lead">{{ page.extra.lead }}</p>{% endif %}
+          {{ page.content | safe }}
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
