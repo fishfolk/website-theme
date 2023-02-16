@@ -20,7 +20,7 @@
           <div class="text-center">{{ section.content | safe }}</div>
           <div class="row mt-6 my-5">
             {% for page in section.pages %}
-            <div class="col-18 col-sm-9">
+            <div class="col-18 col-sm-8">
               <div class="card">
                 <a href="{{ page.permalink }}">
                   <img src="{{ page.extra.image }}" class="card-img-top" alt="{{ page.title }}">
